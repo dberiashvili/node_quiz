@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-//Login
+
 router.post('/login', async (req, res) => {
     const {error} = loginValidation(req.body);
     if (error) {
@@ -55,7 +55,9 @@ router.post('/login', async (req, res) => {
         error:"Email or password is incorrect"
     });
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).json('Email or password is not valid');
+    if (!validPass) return res.status(400).json({
+        error:"Email or password is not valid"
+    });
     const token = jwt.sign({
         user: {
             name: user.name,
