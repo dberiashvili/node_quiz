@@ -11,7 +11,7 @@ router.get('/questions', verify, async (req, res) => {
 router.post('/questions', verify, async (req, res) => {
     const validQuestion = questionSchema.validate(req.body);
     if (validQuestion.error) {
-        res.status(400).json({
+        res.status(200).json({
            error: 'incorrect question schema'
         })
     } else {
